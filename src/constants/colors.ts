@@ -4,7 +4,7 @@ export const colors = {
   textMuted: "#7A7468",
   dark: "#1C1C1C",
   soft: "#ECE4D3",
-  yellow: "#F4DE84",
+  yellow: "#f7e28d",
   green: "#A9B677",
   pink: "#F3B9DA",
   blue: "#BCD0EF",
