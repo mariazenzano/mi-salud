@@ -1,5 +1,6 @@
 import Actions from "@/components/Actions";
 import AssistandCard from "@/components/AssistantCard";
+import HealthSystems from "@/components/HealthSystems";
 import { StyleSheet, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import Header from "../components/Header";
@@ -14,6 +15,7 @@ export default function Index() {
         <ScoreRing />
         <Actions />
         <AssistandCard />
+        <HealthSystems />
       </View>
       <TabBar />
     </SafeAreaView>
