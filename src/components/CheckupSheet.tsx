@@ -87,7 +87,7 @@ const styles = StyleSheet.create({
   chipSelected: { backgroundColor: colors.green },
   chipTextSelected: { color: "#FFFFFF" },
   confirmButton: {
-    backgroundColor: colors.pink,
+    backgroundColor: colors.pink, 
     borderRadius: 24,
     height: 48,
     justifyContent: "center",
