@@ -7,11 +7,13 @@ import CheckupSheet from "./CheckupSheet";
 
 export default function Actions() {
   const [isSheetOpen, setIsSheetOpen] = useState(false);
-
+  const [checkupDay, setCheckupDay] = useState("");
   return (
     <View style={styles.row}>
       <Pressable style={styles.mainButton} onPress={() => setIsSheetOpen(true)}>
-        <Text style={styles.mainText}>Agendar chequeo</Text>
+        <Text style={styles.mainText}>
+          {checkupDay === "" ? "Agendar chequeo" : "Chequeo: " + checkupDay}
+        </Text>
       </Pressable>
       <Pressable style={styles.iconButton}>
         <MaterialCommunityIcons
@@ -33,6 +35,7 @@ export default function Actions() {
       <CheckupSheet
         visible={isSheetOpen}
         onClose={() => setIsSheetOpen(false)}
+        onConfirm={(day) => setCheckupDay(day)}
       />
     </View>
   );

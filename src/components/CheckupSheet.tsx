@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { Modal, Pressable, StyleSheet, Text, View } from "react-native";
 import { colors } from "../constants/colors";
 
@@ -5,8 +6,15 @@ const days = ["Lun 12", "Mar 13", "Mié 14", "Jue 15", "Vie 16"];
 type Props = {
   visible: boolean;
   onClose: () => void;
+  onConfirm: (day: string) => void;
 };
-export default function CheckupSheet({ visible, onClose }: Props) {
+export default function CheckupSheet({ visible, onClose, onConfirm }: Props) {
+  const [selected, setSelected] = useState("");
+  function handleConfirm() {
+    if (selected === "") return;
+    onConfirm(selected);
+    onClose();
+  }
   return (
     <Modal
       visible={visible}
@@ -22,11 +30,25 @@ export default function CheckupSheet({ visible, onClose }: Props) {
           <Text style={styles.subtitle}>Elige el día que prefieras</Text>
           <View style={styles.days}>
             {days.map((day) => (
-              <Pressable key={day} style={styles.chip}>
-                <Text style={styles.chipText}>{day}</Text>
+              <Pressable
+                key={day}
+                style={[styles.chip, day === selected && styles.chipSelected]}
+                onPress={() => setSelected(day)}
+              >
+                <Text
+                  style={[
+                    styles.chipText,
+                    day === selected && styles.chipTextSelected,
+                  ]}
+                >
+                  {day}
+                </Text>
               </Pressable>
             ))}
           </View>
+          <Pressable style={styles.confirmButton} onPress={handleConfirm}>
+            <Text style={styles.confirmText}>Confirmar</Text>
+          </Pressable>
         </View>
       </View>
     </Modal>
@@ -58,8 +80,19 @@ const styles = StyleSheet.create({
     paddingHorizontal: 16,
     height: 40,
     borderRadius: 20,
-    backgroundColor: colors.dark,
+    backgroundColor: colors.soft,
     justifyContent: "center",
   },
-  chipText: { fontSize: 14, fontWeight: "bold", color: colors.soft },
+  chipText: { fontSize: 14, fontWeight: "bold", color: colors.text },
+  chipSelected: { backgroundColor: colors.green },
+  chipTextSelected: { color: "#FFFFFF" },
+  confirmButton: {
+    backgroundColor: colors.pink,
+    borderRadius: 24,
+    height: 48,
+    justifyContent: "center",
+    alignItems: "center",
+    marginTop: 8,
+  },
+  confirmText: { fontSize: 16, fontWeight: "bold", color: colors.text },
 });
