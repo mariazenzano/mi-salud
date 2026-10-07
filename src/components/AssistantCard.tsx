@@ -1,7 +1,10 @@
+import { useState } from "react";
 import { Pressable, StyleSheet, Text, View } from "react-native";
 import { colors } from "../constants/colors";
+import ChatSheet from "./ChatSheet";
 
 export default function AssistandCard() {
+  const [isChatOpen, setIsChatOpen] = useState(false);
   return (
     <View style={styles.card}>
       <Text style={styles.caption}>Asistente Intelly</Text>
@@ -9,9 +12,10 @@ export default function AssistandCard() {
         Taigo, tu puntaje bajó <Text style={styles.highlight}>28%</Text> la
         semana pasada
       </Text>
-      <Pressable style={styles.button}>
-        <Text style={styles.buttonText}>Hablemos</Text>
+      <Pressable style={styles.button} onPress={() => setIsChatOpen(true)}>
+        <Text style={styles.buttonText}>Conversemos</Text>
       </Pressable>
+      <ChatSheet visible={isChatOpen} onClose={() => setIsChatOpen(false)} />
     </View>
   );
 }
