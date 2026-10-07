@@ -1,12 +1,19 @@
 import Ionicons from "@expo/vector-icons/Ionicons";
 import MaterialCommunityIcons from "@expo/vector-icons/MaterialCommunityIcons";
+import { useState } from "react";
 import { Pressable, StyleSheet, Text, View } from "react-native";
 import { colors } from "../constants/colors";
+import CheckupSheet from "./CheckupSheet";
+
 export default function Actions() {
+  const [isSheetOpen, setIsSheetOpen] = useState(false);
+  const [checkupDay, setCheckupDay] = useState("");
   return (
     <View style={styles.row}>
-      <Pressable style={styles.mainButton}>
-        <Text style={styles.mainText}>Agendar chequeo</Text>
+      <Pressable style={styles.mainButton} onPress={() => setIsSheetOpen(true)}>
+        <Text style={styles.mainText}>
+          {checkupDay === "" ? "Agendar chequeo" : "Chequeo: " + checkupDay}
+        </Text>
       </Pressable>
       <Pressable style={styles.iconButton}>
         <MaterialCommunityIcons
@@ -25,6 +32,11 @@ export default function Actions() {
       <Pressable style={styles.iconButton}>
         <Ionicons name="paper-plane-outline" size={20} color={colors.text} />
       </Pressable>
+      <CheckupSheet
+        visible={isSheetOpen}
+        onClose={() => setIsSheetOpen(false)}
+        onConfirm={(day) => setCheckupDay(day)}
+      />
     </View>
   );
 }
